@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Start{% endblock %}</title>
+    <link rel="stylesheet" href="/static/app.css" />
+  </head>
+  <body>
+    <h1>{{title}}</h1>
+    {% with msg = get_flashed_messages(with_categories=true) %} 
+    {% if msg%}
+        <section class="messages">
+        {% for category, message in msg %}
+        <p class="{{category}}">{{message}}</p>
+        {% endfor %}
+        </section>
+    {% endif %} 
+    {% endwith %} 
+    {% block heading %} {% endblock %} 
+    {% block content %}
+        <p>{{instrucs}}</p>
+        <form action="/session" method="POST">
+        <button>Start!</button>
+        </form>
+    {% endblock %}
+  </body>
+</html>
